@@ -1,0 +1,25 @@
+SHOW FUNCTIONS
+# to see all inbuilt functions
+
+
+DESCRIBE FUNCTION concat
+# calling function:
+# select concat(fname,lname) as fullname from emp
+
+
+We have 3 types of functions in Hive:
+1. Standard functions: round(), floor(), abs(), reverse(), concat(), ucase()
+
+2. Aggregate functions: Sum(), Avg(), Min(), Max()
+
+3. Table generating functions: explode(), Array()
+
+------------------------------------------------------------------------------------------------------------------------
+Types of UDF:
+1. Regular UDF: Operate on a single row and produces a single row as its output
+2. User Defined Aggregate functions: Works on multiple input row and creates a single output row
+3. User Defined Table generating functions: Operates on a single row and produces multiple row (a table) as output
+
+Conditions of UDF:
+1. A UDF must be a subclass of org.apache.hadoop.hive.ql.exec.UDF
+2. A UDF must implement at least one evaluate method. Its not just a override, we can overload as well
