@@ -146,3 +146,5 @@ SELECT
       FROM sales_table
         WINDOW wind AS (PARTITION BY sales ORDER BY date
             ROWS BETWEEN 29 PRECEDING AND CURRENT ROW);
+
+Repo link: https://github.com/singh-vivekk/hive/tree/master/hiveProject/Queries

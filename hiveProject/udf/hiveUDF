@@ -1,17 +1,13 @@
 SHOW FUNCTIONS
 # to see all inbuilt functions
 
-
 DESCRIBE FUNCTION concat
 # calling function:
 # select concat(fname,lname) as fullname from emp
 
-
 We have 3 types of functions in Hive:
 1. Standard functions: round(), floor(), abs(), reverse(), concat(), ucase()
-
 2. Aggregate functions: Sum(), Avg(), Min(), Max()
-
 3. Table generating functions: explode(), Array()
 
 ------------------------------------------------------------------------------------------------------------------------
@@ -23,3 +19,68 @@ Types of UDF:
 Conditions of UDF:
 1. A UDF must be a subclass of org.apache.hadoop.hive.ql.exec.UDF
 2. A UDF must implement at least one evaluate method. Its not just a override, we can overload as well
+
+
+---------------UDFs------------------
+To create a custom UDF you would require a Java Class defining how your UDF should work
+and this class needs to imported in hive in the farm of Jar file.
+
+#Add Dependency JAR file to your eclipse build path
+
+You can get the hive-exec JAR from :
+    A: Maven Repository
+    B: From your Cloudera VM Path: /usr/lib/hive/lib/hive-exec-1.1.0-cdh5.13.0.jar
+
+
+
+#Create a Java class extending hive's "UDF" class
+
+UDF class is provided in Package "org.apache.hadoop.hive.ql.exec"
+Provide Description of UDF by using @Description provided in org.apache.hadoop.hive.ql.exec.Description class
+Create a Java class extending hive's "UDF" class
+Override "evaluate(String input)" method
+Code Example :
+
+---------------------------------------------------------------------------------------------
+package com.hive.custom;
+
+import org.apache.hadoop.hive.ql.exec.Description;
+import org.apache.hadoop.hive.ql.exec.UDF;
+@Description(name="SeasonOfTheYear",
+value="This takes month of the year and returns SeasonOfTheYear")
+public class SeasonOfTheYear extends UDF{
+
+    public static String evaluate(String input) {
+    if(input == null || "".equals(input))
+      return null;
+    int month= -1;
+  try {
+      month = Integer.parseInt(input);
+      } catch (NumberFormatException ex){
+          return null;
+      }
+
+    if(month <=0 ||  month >12)
+    {
+      return null;
+    }
+
+    if(month ==1 || month ==2 || month ==12){ // Jan,Feb and Dec - comes under Winter
+        return "Winter";
+    }
+    else if( month ==3|| month==4|| month==5){ // March,April and May comes under Spring
+        return "Spring";
+    }
+    else if( month ==6 || month==7 || month==8 ){ //June and July comes under Summer
+      return "Summer";
+    }
+    else if(month ==9|| month==10|| month==11) // Sep,Oct and Nov comes under Fall
+    {
+      return "Fall";
+    }
+    else {
+        return null; // In case of invalid month it will fall under wrong season.
+    }
+  }
+}
+---------------------------------------------------------------------------------------------

@@ -1,0 +1,33 @@
+Using AVRO file:
+------------------------
+Avro files are been supported in Hive 0.14.0 and later.
+
+------------------------------
+For creating normal table:
+------------------------------
+CREATE TABLE test1
+STORED AS AVRO
+TBLPROPERTIES (
+  'avro.schema.url'='/user/septbatch/test.avsc');
+
+-----------------------------------
+For creating partitioned table:
+-----------------------------------
+CREATE TABLE kst
+PARTITIONED BY (ds string)
+STORED AS AVRO
+TBLPROPERTIES (
+  'avro.schema.url'='http://schema_provider/kst.avsc');
+
+
+-----------------------------------------------------------------------------------
+Sample AVSC file: Place this avsc at hdfs path and use the file location
+-----------------------------------------------------------------------------------
+{
+"type": "record",
+"name": "test",
+"fields" : [
+{"name": "a", "type": "long"},
+{"name": "b", "type": "string"}
+]
+}

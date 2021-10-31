@@ -1,0 +1,63 @@
+tblproperties ("skip.header.line.count"="1");
+
+INSERT OVERWRITE TABLE Test
+SELECT * from Test WHERE RecordId IS NOT NULL
+
+----------------------------------------------------------------------
+Alter commands:
+----------------------------------------------------------------------
+CREATE TABLE student
+(
+Id int                          COMMENT 'student_roll_no',
+Name String            COMMENT 'Student_name',
+Class INT                  COMMENT 'Student_class ',
+Grade string            COMMENT 'Student_grade '
+)
+COMMENT 'Student information '
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY '\t'
+
+----------------------------------------------------------------------
+Rename Table:
+----------------------------------------------------------------------
+
+ALTER TABLE <existing TABLE NAME> RENAME TO <new_name>;
+
+hive (default)> alter table student rename to septbatch.student;      # changing the db of a table. Moving a table from one db to another db
+
+----------------------------------------------------------------------
+CHANGE THE TABLE TYPE:
+----------------------------------------------------------------------
+ALTER TABLE <table_name> SET TBLPROPERTIES ('EXTERNAL'='FALSE')
+
+----------------------------------------------------------------------
+ADD A COLUMN:
+----------------------------------------------------------------------
+ALTER TABLE <tablename> ADD COLUMNS (col_name STRING [AFTER ID]);
+ALTER TABLE student CHANGE (lastname l_name STRING);
+
+----------------------------------------------------------------------
+SET LOCATION
+----------------------------------------------------------------------
+ALTER TABLE student SET LOCATION  'hdfs_new_path',
+
+ALTER TABLE student SET TBLPROPERTIES('field.delim'=',')
+
+
+::::::::::::::::::::::::: HOW TO CREATE A HIVE TABLE ::::::::::::::::::::::::
+Ways to create a table:
+
+Create table <new_table_name> LIKE <existing table name>
+
+With Data.
+
+CREATE TABLE <new table name> AS SELECT (columns) from (existing table name)    # CTAS
+
+
+:::::::::::::: Execution Methods ::::::::::::::::::::::
+
+Hive -e "select * from septbatch.testselect"
+
+hive -S -e "select * from septbatch.testselect";
+
+Hive -f  'path/name of the file'

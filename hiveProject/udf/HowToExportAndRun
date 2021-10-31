@@ -1,0 +1,22 @@
+1. Export JAR file from Eclipse Project
+
+2. Add Jar On to Hive
+
+hive> Add JAR <Jar File Path>/<JarName>.jar
+
+3. Create UDF under Hive:
+-----------------------
+hive> create temporary function seasonOfTheYear as 'com.hive.custom.SeasonOfTheYear
+
+
+
+Create function and add jar permanently
+----------------------------------------
+Above command 'add jar ' and 'create temporary..' will be valid for your current session of hive ,
+ if you would like to store this jar info and function definition on hive itself you may want to use below command
+
+
+To add permanently:
+-------------------
+hive> CREATE FUNCTION seasonOfTheYear AS 'com.hive.custom.SeasonOfTheYear'
+        using JAR 'hdfs://localhost:8020/user/cloudera/CustomYDF.jar';
