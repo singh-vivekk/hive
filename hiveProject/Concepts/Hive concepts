@@ -1,0 +1,16 @@
+''' ---------- Subqueries concepts --------- '''
+Hive supports subqueries in FROM clauses and in WHERE clauses of SQL statements.
+A subquery is a SQL expression that is evaluated and returns a result set.
+Then that result set is used to evaluate the parent query.
+The parent query is the outer query that contains the child subquery.
+Subqueries in WHERE clauses are supported in Hive 0.13 and later.
+The following example shows a subquery inserted into a WHERE clause:
+
+    SELECT state, net_payments
+        FROM transfer_payments
+            WHERE transfer_payments.year IN (SELECT year FROM us_census);
+
+No configuration is required to enable execution of subqueries in Hive.
+The feature is available by default.
+However, several restrictions exist for the use of subqueries in WHERE clauses.
+Subqueries in WHERE clauses are supported in Hive 0.13 and later.
