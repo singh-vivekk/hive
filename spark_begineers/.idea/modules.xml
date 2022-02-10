@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../SparkBegineer/.idea/SparkBegineer.iml" filepath="$PROJECT_DIR$/../SparkBegineer/.idea/SparkBegineer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../pysparkProject/.idea/pysparkProject.iml" filepath="$PROJECT_DIR$/../pysparkProject/.idea/pysparkProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../python_begineers/.idea/python_begineers.iml" filepath="$PROJECT_DIR$/../python_begineers/.idea/python_begineers.iml" />
+    </modules>
+  </component>
+</project>
